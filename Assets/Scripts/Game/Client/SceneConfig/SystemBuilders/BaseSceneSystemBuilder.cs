@@ -1,7 +1,7 @@
 ﻿using Leopotam.EcsLite;
 using UnityEngine;
 
-namespace Game.SceneConfig
+namespace Game.Client.SceneConfig
 {
     public abstract class BaseSceneSystemBuilder : MonoBehaviour
     {

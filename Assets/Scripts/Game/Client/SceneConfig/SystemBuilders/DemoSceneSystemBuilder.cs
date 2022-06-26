@@ -1,7 +1,7 @@
 ﻿using Game.Core.Movement;
 using Leopotam.EcsLite;
 
-namespace Game.SceneConfig
+namespace Game.Client.SceneConfig
 {
     public sealed class DemoSceneSystemBuilder : BaseSceneSystemBuilder
     {
