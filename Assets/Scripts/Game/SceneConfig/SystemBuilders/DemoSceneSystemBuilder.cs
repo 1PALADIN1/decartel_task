@@ -1,4 +1,5 @@
-﻿using Leopotam.EcsLite;
+﻿using Game.Core.Movement;
+using Leopotam.EcsLite;
 
 namespace Game.SceneConfig
 {
@@ -6,7 +7,13 @@ namespace Game.SceneConfig
     {
         public override void Build(EcsSystems ecsSystems)
         {
-            
+            CreateGameplaySystems(ecsSystems);
+        }
+
+        private void CreateGameplaySystems(EcsSystems ecsSystems)
+        {
+            ecsSystems
+                .Add(new MoveToDestinationSystem());
         }
     }
 }
