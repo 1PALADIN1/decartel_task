@@ -4,15 +4,15 @@ namespace Game.Core.Doors
 {
 	public sealed class DoorSetupSystem : IEcsInitSystem
 	{
-		private EcsFilter _doorFilter;
-		
-		private EcsPool<Door> _doorPool;
-		
 		public void Init(EcsSystems systems)
 		{
-			foreach (var entity in _doorFilter)
+			var world = systems.GetWorld();
+			var doorFilter = world.Filter<Door>().End();
+			var doorPool = world.GetPool<Door>();
+			
+			foreach (var entity in doorFilter)
 			{
-				ref var door = ref _doorPool.Get(entity);
+				ref var door = ref doorPool.Get(entity);
 				door.CurrentOpenValue = 1f;
 			}
 		}
