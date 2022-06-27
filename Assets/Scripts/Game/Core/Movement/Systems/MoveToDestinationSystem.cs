@@ -20,6 +20,7 @@ namespace Game.Core.Movement
                 .Filter<Destination>()
                 .Inc<Position>()
                 .Inc<Movement>()
+                .Inc<DeltaTime>()
                 .End();
             
             _destinationPool = world.GetPool<Destination>();

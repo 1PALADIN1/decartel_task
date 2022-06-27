@@ -17,7 +17,9 @@ namespace Game.Client.SceneConfig
                 .Add(new MoveToDestinationSystem())
                 //doors
                 .Add(new FloorButtonPressedSystem())
-                .Add(new FloorButtonReleasedSystem());
+                .Add(new FloorButtonReleasedSystem())
+                .Add(new DoorSetupSystem())
+                .Add(new DoorOpenSystem());
         }
     }
 }
