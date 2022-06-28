@@ -1,3 +1,4 @@
+using Game.Core.Common;
 using Game.Core.Doors;
 using UnityEngine;
 
@@ -14,6 +15,9 @@ namespace Game.Client
 			ref var button = ref World.GetPool<FloorButton>().Add(entity);
 			button.Color = _color;
 			button.Radius = _radius;
+
+			ref var position = ref World.GetPool<Position>().Add(entity);
+			position.Value = transform.position;
 		}
 	}
 }

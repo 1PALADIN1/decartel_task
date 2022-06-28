@@ -12,6 +12,7 @@ namespace Game.Core.Doors
 	{
 		private EcsFilter _doorFilter;
 		private EcsFilter _buttonPressedFilter;
+		private EcsFilter _deltaTimeFilter;
 		
 		private EcsPool<Door> _doorPool;
 		private EcsPool<FloorButtonPressed> _buttonPressedPool;
@@ -25,11 +26,14 @@ namespace Game.Core.Doors
 
 			_doorFilter = world
 				.Filter<Door>()
-				.Inc<DeltaTime>()
 				.End();
 
 			_buttonPressedFilter = world
 				.Filter<FloorButtonPressed>()
+				.End();
+
+			_deltaTimeFilter = world
+				.Filter<DeltaTime>()
 				.End();
 
 			_doorPool = world.GetPool<Door>();
@@ -43,6 +47,14 @@ namespace Game.Core.Doors
 		{
 			_openingDoorColors.Clear();
 			
+			var dt = 0f;
+			foreach (var deltaTimeEntity in _deltaTimeFilter)
+			{
+				ref var deltaTime = ref _deltaTimePool.Get(deltaTimeEntity);
+				dt = deltaTime.Value;
+				break;
+			}
+			
 			foreach (var buttonEntity in _buttonPressedFilter)
 			{
 				ref var pressedButton = ref _buttonPressedPool.Get(buttonEntity);
@@ -54,10 +66,7 @@ namespace Game.Core.Doors
 			{
 				ref var door = ref _doorPool.Get(doorEntity);
 				if (_openingDoorColors.Contains(door.Color))
-				{
-					ref var deltaTime = ref _deltaTimePool.Get(doorEntity);
-					door.CurrentOpenValue = Mathf.Max(0f, door.CurrentOpenValue - door.OpenSpeed * deltaTime.Value);
-				}
+					door.CurrentOpenValue = Mathf.Max(0f, door.CurrentOpenValue - door.OpenSpeed * dt);
 			}
 		}
 	}
