@@ -34,7 +34,8 @@ namespace Game.Client.SceneConfig
                 //movement
                 .Add(new SyncPositionWithViewSystem())
                 //doors
-                .Add(new DoorOpenAnimationSystem());
+                .Add(new DoorOpenAnimationSystem())
+                .Add(new ButtonPressedAnimation());
         }
     }
 }

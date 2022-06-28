@@ -113,3 +113,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _color: 2
   _radius: 1.25
+  _maxY: 1.2
+  _minY: 0.9

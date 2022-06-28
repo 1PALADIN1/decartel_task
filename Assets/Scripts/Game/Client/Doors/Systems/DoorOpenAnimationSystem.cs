@@ -10,7 +10,7 @@ namespace Game.Client
 
 		private EcsPool<Door> _doorPool;
 		private EcsPool<View> _viewPool;
-		private EcsPool<DoorAnimation> _doorAnimationPool;
+		private EcsPool<OpenCloseAnimation> _doorAnimationPool;
 
 		public void Init(EcsSystems systems)
 		{
@@ -19,12 +19,12 @@ namespace Game.Client
 			_doorFilter = world
 				.Filter<Door>()
 				.Inc<View>()
-				.Inc<DoorAnimation>()
+				.Inc<OpenCloseAnimation>()
 				.End();
 
 			_doorPool = world.GetPool<Door>();
 			_viewPool = world.GetPool<View>();
-			_doorAnimationPool = world.GetPool<DoorAnimation>();
+			_doorAnimationPool = world.GetPool<OpenCloseAnimation>();
 		}
 
 		public void Run(EcsSystems systems)
@@ -36,7 +36,7 @@ namespace Game.Client
 				ref var doorAnimation = ref _doorAnimationPool.Get(entity);
 				
 				var currentPosition = view.Value.transform.position;
-				currentPosition.y = Mathf.Lerp(doorAnimation.FromY, doorAnimation.ToY, 1f - door.CurrentOpenValue);
+				currentPosition.y = Mathf.Lerp(doorAnimation.MaxY, doorAnimation.MinY, 1f - door.CurrentOpenValue);
 				view.Value.transform.position = currentPosition;
 			}
 		}

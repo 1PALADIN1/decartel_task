@@ -112,5 +112,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _doorColor: 1
   _doorOpenSpeed: 0.5
-  _fromY: 1.5
-  _toY: 0.4
+  _maxY: 1.5
+  _minY: 0.4

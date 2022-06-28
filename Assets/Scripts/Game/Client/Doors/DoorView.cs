@@ -9,8 +9,8 @@ namespace Game.Client
 		[SerializeField, Min(0f)] private float _doorOpenSpeed;
 
 		[Header("Animation")]
-		[SerializeField] private float _fromY;
-		[SerializeField] private float _toY;
+		[SerializeField] private float _maxY;
+		[SerializeField] private float _minY;
 		
 		protected override void OnInitialized()
 		{
@@ -22,9 +22,9 @@ namespace Game.Client
 			ref var view = ref World.GetPool<View>().Add(entity);
 			view.Value = gameObject;
 
-			ref var doorAnimation = ref World.GetPool<DoorAnimation>().Add(entity);
-			doorAnimation.FromY = _fromY;
-			doorAnimation.ToY = _toY;
+			ref var doorAnimation = ref World.GetPool<OpenCloseAnimation>().Add(entity);
+			doorAnimation.MaxY = _maxY;
+			doorAnimation.MinY = _minY;
 		}
 	}
 }
