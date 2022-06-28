@@ -7,6 +7,10 @@ namespace Game.Client
 	{
 		[SerializeField] private DoorColor _doorColor;
 		[SerializeField, Min(0f)] private float _doorOpenSpeed;
+
+		[Header("Animation")]
+		[SerializeField] private float _fromY;
+		[SerializeField] private float _toY;
 		
 		protected override void OnInitialized()
 		{
@@ -14,6 +18,13 @@ namespace Game.Client
 			ref var door = ref World.GetPool<Door>().Add(entity);
 			door.Color = _doorColor;
 			door.OpenSpeed = _doorOpenSpeed;
+
+			ref var view = ref World.GetPool<View>().Add(entity);
+			view.Value = gameObject;
+
+			ref var doorAnimation = ref World.GetPool<DoorAnimation>().Add(entity);
+			doorAnimation.FromY = _fromY;
+			doorAnimation.ToY = _toY;
 		}
 	}
 }

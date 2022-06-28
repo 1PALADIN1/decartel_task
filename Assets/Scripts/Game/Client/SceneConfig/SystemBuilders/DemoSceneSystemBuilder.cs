@@ -8,11 +8,11 @@ namespace Game.Client.SceneConfig
     {
         public override void Build(EcsSystems ecsSystems)
         {
-            CreateGameplaySystems(ecsSystems);
+            CreateCoreSystems(ecsSystems);
             CreateClientSystems(ecsSystems);
         }
 
-        private void CreateGameplaySystems(EcsSystems ecsSystems)
+        private void CreateCoreSystems(EcsSystems ecsSystems)
         {
             ecsSystems
                 //movement
@@ -32,7 +32,9 @@ namespace Game.Client.SceneConfig
                 //player
                 .Add(new PlayerControlSystem())
                 //movement
-                .Add(new SyncPositionWithViewSystem());
+                .Add(new SyncPositionWithViewSystem())
+                //doors
+                .Add(new DoorOpenAnimationSystem());
         }
     }
 }

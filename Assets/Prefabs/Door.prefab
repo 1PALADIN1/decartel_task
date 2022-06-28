@@ -111,4 +111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _doorColor: 1
-  _doorOpenSpeed: 2
+  _doorOpenSpeed: 0.5
+  _fromY: 1.5
+  _toY: 0.4
