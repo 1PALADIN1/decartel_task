@@ -1965,6 +1965,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 279d2f4f57950406c893486c103ce087, type: 2}
+    - target: {fileID: 8694654449185121351, guid: 138a79c3660a54e53acbbd61f9bbd1fb, type: 3}
+      propertyPath: _doorColor
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 138a79c3660a54e53acbbd61f9bbd1fb, type: 3}
 --- !u!4 &494559141 stripped
@@ -5493,6 +5497,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c94b59b9207bd461289d56d34ca84f54, type: 2}
+    - target: {fileID: 8694654449185121351, guid: 138a79c3660a54e53acbbd61f9bbd1fb, type: 3}
+      propertyPath: _doorColor
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 138a79c3660a54e53acbbd61f9bbd1fb, type: 3}
 --- !u!4 &1548083382 stripped
