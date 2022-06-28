@@ -7,6 +7,7 @@ namespace Game.Core.Movement
     public sealed class MoveToDestinationSystem : IEcsInitSystem, IEcsRunSystem
     {
         private EcsFilter _movementFilter;
+        private EcsFilter _deltaTimeFilter;
 
         private EcsPool<Destination> _destinationPool;
         private EcsPool<Position> _positionPool;
@@ -16,11 +17,15 @@ namespace Game.Core.Movement
         public void Init(EcsSystems systems)
         {
             var world = systems.GetWorld();
+            
             _movementFilter = world
                 .Filter<Destination>()
                 .Inc<Position>()
                 .Inc<Movement>()
-                .Inc<DeltaTime>()
+                .End();
+
+            _deltaTimeFilter = world
+                .Filter<DeltaTime>()
                 .End();
             
             _destinationPool = world.GetPool<Destination>();
@@ -31,6 +36,14 @@ namespace Game.Core.Movement
         
         public void Run(EcsSystems systems)
         {
+            var dt = 0f;
+            foreach (var deltaTimeEntity in _deltaTimeFilter)
+            {
+                ref var deltaTime = ref _deltaTimePool.Get(deltaTimeEntity);
+                dt = deltaTime.Value;
+                break;
+            }
+
             foreach (var entity in _movementFilter)
             {
                 ref var destination = ref _destinationPool.Get(entity);
@@ -38,16 +51,15 @@ namespace Game.Core.Movement
                 ref var movement = ref _movementPool.Get(entity);
                 
                 if (Mathf.Abs(destination.Value.x - position.Value.x) <= movement.StoppingDistance
-                    && Mathf.Abs(destination.Value.y - position.Value.y) <= movement.StoppingDistance)
+                    && Mathf.Abs(destination.Value.z - position.Value.z) <= movement.StoppingDistance)
                 {
                     //объект у цели
                     _destinationPool.Del(entity);
                     continue;
                 }
 
-                ref var deltaTime = ref _deltaTimePool.Get(entity);
                 var movementOffset = (destination.Value - position.Value).normalized 
-                                    * (movement.Speed * deltaTime.Value);
+                                     * (movement.Speed * dt);
 
                 position.Value += movementOffset;
             }
