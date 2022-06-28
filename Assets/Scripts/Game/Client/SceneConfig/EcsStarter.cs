@@ -17,6 +17,10 @@ namespace Game.Client.SceneConfig
             
             if (_sceneSystemBuilder)
                 _sceneSystemBuilder.Build(_systems);
+
+#if UNITY_EDITOR
+            _systems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
+#endif
             
             _systems.Init();
         }
